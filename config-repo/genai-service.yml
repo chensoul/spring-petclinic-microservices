@@ -1,0 +1,35 @@
+﻿server.port: 8084
+
+spring:
+  main:
+    web-application-type: reactive
+  config:
+    import: optional:configserver:http://localhost:8888/,optional:classpath:/creds.yaml
+  #These apply when using spring-ai-azure-openai-spring-boot-starter
+  ai:
+    chat:
+      client:
+        enabled: true
+    azure:
+      openai:
+        chat:
+          options:
+            functions: listOwners,addOwnerToPetclinic,addPetToOwner,listVets
+            temperature: 0.7
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
+
+---
+spring.config.activate.on-profile: docker
+
+eureka.client.serviceUrl.defaultZone: http://discovery-server:8761/eureka/
+
+management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+

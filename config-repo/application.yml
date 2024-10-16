@@ -1,0 +1,63 @@
+server:
+  # The stop processing uses a timeout which provides a grace period during which existing requests will be allowed to complete but no new requests will be permitted
+  shutdown: graceful
+  wait-for-shutdown: 10s
+
+# embedded database init, supports mysql too trough the 'mysql' spring profile
+spring:
+  sql:
+    init:
+      schema-locations: classpath*:db/hsqldb/schema.sql
+      data-locations: classpath*:db/hsqldb/data.sql
+  cloud:
+    config:
+      # Allow the microservices to override the remote properties with their own System properties or config file
+      allow-override: true
+      # Override configuration with any local property source
+      override-none: true
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+
+# Logging
+# spring-admin-server 查看日志 https://docs.spring-boot-admin.com/current/client.html
+logging.file.name: logs/${spring.application.name}.log
+logging.level.org.springframework: INFO
+
+# Metrics
+management.endpoint.health.show-details: "ALWAYS"
+management.endpoints.web.exposure.include: "*"
+management.tracing.sampling.probability: 1.0
+
+management.zipkin.tracing.endpoint: http://localhost:9411/api/v2/spans
+
+# Chaos Engineering
+---
+spring.config.activate.on-profile: chaos-monkey
+
+management.endpoint.chaosmonkey.enabled: true
+
+chaos:
+  monkey:
+    enabled: true
+    watcher:
+      component: false
+      controller: false
+      repository: false
+      rest-controller: false
+      service: false
+
+---
+spring.config.activate.on-profile: mysql
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/petclinic?useSSL=false
+    username: root
+    password: petclinic
+  sql:
+    init:
+      schema-locations: classpath*:db/mysql/schema.sql
+      data-locations: classpath*:db/mysql/data.sql
+      init: ALWAYS

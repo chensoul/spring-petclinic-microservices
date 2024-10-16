@@ -1,0 +1,57 @@
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json,text/css,application/javascript
+    min-response-size: 2048
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - name: CircuitBreaker
+          args:
+            name: defaultCircuitBreaker
+            fallbackUri: forward:/fallback
+        - name: Retry
+          args:
+            retries: 1
+            statuses: SERVICE_UNAVAILABLE
+            methods: GET, POST
+      routes:
+        - id: vets-service
+          uri: lb://vets-service
+          predicates:
+            - Path=/api/vet/**
+          filters:
+            - StripPrefix=2
+        - id: visits-service
+          uri: lb://visits-service
+          predicates:
+            - Path=/api/visit/**
+          filters:
+            - StripPrefix=2
+        - id: customers-service
+          uri: lb://customers-service
+          predicates:
+            - Path=/api/customer/**
+          filters:
+            - StripPrefix=2
+        - id: genai-service
+          uri: lb://genai-service
+          predicates:
+            - Path=/api/genai/**
+          filters:
+            - StripPrefix=2
+            - CircuitBreaker=name=genaiCircuitBreaker,fallbackUri=/fallback
+
+# Internationalization
+spring.messages.basename: messages/messages
+
+---
+spring.config.activate.on-profile: docker
+
+eureka.client.serviceUrl.defaultZone: http://discovery-server:8761/eureka/
+
+management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+

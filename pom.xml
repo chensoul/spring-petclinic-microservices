@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -27,15 +28,11 @@
     </modules>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>21</java.version>
 
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <chaos-monkey-spring-boot.version>3.1.0</chaos-monkey-spring-boot.version>
-        <jolokia-core.version>1.7.1</jolokia-core.version>
-
-        <!-- Workaround for resolving the issue while using the provided lombok dependency in upgraded Java version.
-        Should be removed while future upgrading-->
-        <lombok.version>1.18.30</lombok.version>
+        <jolokia-core.version>2.1.0</jolokia-core.version>
 
         <docker.image.prefix>springcommunity</docker.image.prefix>
         <docker.image.exposed.port>9090</docker.image.exposed.port>
@@ -66,7 +63,7 @@
             </dependency>
             <dependency>
                 <groupId>org.jolokia</groupId>
-                <artifactId>jolokia-core</artifactId>
+                <artifactId>jolokia-support-spring</artifactId>
                 <version>${jolokia-core.version}</version>
             </dependency>
             <dependency>
@@ -76,6 +73,24 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <profiles>
         <profile>
@@ -123,7 +138,8 @@
                             <verbose>true</verbose>
                             <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
                             <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                            <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                            <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+                            </generateGitPropertiesFilename>
                             <failOnNoGitDirectory>false</failOnNoGitDirectory>
                             <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
                         </configuration>

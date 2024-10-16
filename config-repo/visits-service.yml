@@ -1,0 +1,15 @@
+﻿server.port: 8082
+
+eureka:
+  instance:
+    # enable to register multiple app instances with a random server port
+    instance-id: ${spring.application.name}:${random.uuid}
+
+---
+spring.config.activate.on-profile: docker
+
+eureka.client.serviceUrl.defaultZone: http://discovery-server:8761/eureka/
+
+management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+
+

@@ -15,20 +15,17 @@
  */
 package org.springframework.samples.petclinic.genai.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import org.springframework.beans.support.MutableSortDefinition;
-import org.springframework.beans.support.PropertyComparator;
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.xml.bind.annotation.XmlElement;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.support.MutableSortDefinition;
+import org.springframework.beans.support.PropertyComparator;
 
 /**
  * Simple Data Transfer Object representing a vet.
@@ -61,7 +58,6 @@ public class Vet {
         return this.specialties;
     }
 
-    @XmlElement
     public List<Specialty> getSpecialties() {
         List<Specialty> sortedSpecs = new ArrayList<>(getSpecialtiesInternal());
         PropertyComparator.sort(sortedSpecs, new MutableSortDefinition("name", true, true));

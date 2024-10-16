@@ -22,7 +22,7 @@ spring:
 
 # Logging
 # spring-admin-server 查看日志 https://docs.spring-boot-admin.com/current/client.html
-logging.file.name: logs/${spring.application.name}.log
+logging.file.name: logs/${spring.application.name}/all.log
 logging.level.org.springframework: INFO
 
 # Metrics

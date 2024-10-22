@@ -1,10 +1,5 @@
 ﻿server.port: 8083
 
-eureka:
-  instance:
-    # enable to register multiple app instances with a random server port
-    instance-id: ${spring.application.name}:${random.uuid}
-
 vets:
   cache:
     ttl: 60
@@ -15,5 +10,5 @@ spring.config.activate.on-profile: docker
 
 eureka.client.serviceUrl.defaultZone: http://discovery-server:8761/eureka/
 
-management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+loki.url: http://loki:3100/loki/api/v1/push
 

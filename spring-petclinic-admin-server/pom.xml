@@ -17,12 +17,11 @@
 
     <properties>
         <spring-boot-admin.version>3.3.4</spring-boot-admin.version>
-        <docker.image.exposed.port>9090</docker.image.exposed.port>
+        <docker.image.exposed.port>8090</docker.image.exposed.port>
         <docker.image.dockerfile.dir>${basedir}/../docker</docker.image.dockerfile.dir>
     </properties>
 
     <dependencies>
-        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -36,7 +35,6 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
-        <!-- Spring Boot Admin -->
         <dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-server</artifactId>
@@ -48,8 +46,7 @@
             <version>${spring-boot-admin.version}</version>
         </dependency>
 
-        <!-- Third-party librairies -->
-        <dependency>
+       <dependency>
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-support-spring</artifactId>
         </dependency>

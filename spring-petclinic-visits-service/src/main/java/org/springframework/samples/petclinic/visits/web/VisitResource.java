@@ -15,11 +15,10 @@
  */
 package org.springframework.samples.petclinic.visits.web;
 
-import java.util.List;
+import io.micrometer.core.annotation.Timed;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
-
-import io.micrometer.core.annotation.Timed;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;

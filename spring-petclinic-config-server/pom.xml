@@ -20,19 +20,17 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Cloud -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
 
-        <!-- Third-party librairies -->
-        <dependency>
+       <dependency>
             <groupId>org.jolokia</groupId>
             <artifactId>jolokia-support-spring</artifactId>
         </dependency>
 
-        <!-- Testing -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

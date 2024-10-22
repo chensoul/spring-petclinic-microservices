@@ -1,7 +1,8 @@
 package org.springframework.samples.petclinic.genai;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
-
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -10,9 +11,6 @@ import org.springframework.samples.petclinic.genai.dto.OwnerDetails;
 import org.springframework.samples.petclinic.genai.dto.PetDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Functions that are invoked by the LLM will use this bean to query the system of record
@@ -25,10 +23,10 @@ public class AIDataProvider {
 
 	private final VectorStore vectorStore;
     private String ownersHostname = "http://customers-service/";
-    
+
     private final WebClient webClient;
 
-	
+
 	public AIDataProvider(WebClient.Builder webClientBuilder, VectorStore vectorStore) {
 		this.webClient = webClientBuilder.build();
 		this.vectorStore = vectorStore;
@@ -59,7 +57,7 @@ public class AIDataProvider {
 	}
 
 	public AddedPetResponse addPetToOwner(AddPetRequest request) {
-		
+
 		return new AddedPetResponse(webClient
 	            .post()
 	            .uri(ownersHostname + "owners/"+request.ownerId()+"/pets")

@@ -15,10 +15,8 @@
  */
 package org.springframework.samples.petclinic.vets.web;
 
-import lombok.RequiredArgsConstructor;
-
 import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.samples.petclinic.vets.model.Vet;
 import org.springframework.samples.petclinic.vets.model.VetRepository;

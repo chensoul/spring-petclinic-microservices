@@ -15,14 +15,13 @@
  */
 package org.springframework.samples.petclinic.genai.dto;
 
-import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
 /**
  * Simple Data Transfer Object representing a pet data type.
- * 
+ *
  * @author Oded Shopen
  */
 @Data

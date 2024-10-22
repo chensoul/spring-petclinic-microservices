@@ -1,9 +1,10 @@
 package org.springframework.samples.petclinic.genai;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.document.Document;
@@ -21,9 +22,6 @@ import org.springframework.samples.petclinic.genai.dto.Vet;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /**
  * Loads the veterinarians data into a vector store for the purpose of RAG functionality.
  *
@@ -37,7 +35,7 @@ public class VectorStoreController {
 	private final VectorStore vectorStore;
     private final WebClient webClient;
     private final String vetsHostname = "http://vets-service/";
-		
+
 	public VectorStoreController(VectorStore vectorStore, WebClient.Builder webClientBuilder) throws IOException {
 		this.webClient = webClientBuilder.build();
 		this.vectorStore = vectorStore;

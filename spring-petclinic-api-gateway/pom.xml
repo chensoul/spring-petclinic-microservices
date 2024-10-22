@@ -25,7 +25,6 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Cloud -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-reactor-resilience4j</artifactId>
@@ -77,6 +76,11 @@
             <groupId>io.zipkin.reporter2</groupId>
             <artifactId>zipkin-reporter-brave</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.github.loki4j</groupId>
+            <artifactId>loki-logback-appender</artifactId>
+            <version>1.3.2</version>
+        </dependency>
 
         <!-- Webjars -->
         <dependency>
@@ -110,7 +114,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Testing -->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

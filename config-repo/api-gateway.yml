@@ -53,5 +53,5 @@ spring.config.activate.on-profile: docker
 
 eureka.client.serviceUrl.defaultZone: http://discovery-server:8761/eureka/
 
-management.zipkin.tracing.endpoint: http://zipkin:9411/api/v2/spans
+loki.url: http://loki:3100/loki/api/v1/push
 

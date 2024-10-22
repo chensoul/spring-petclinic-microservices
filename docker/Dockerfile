@@ -1,3 +1,4 @@
+
 FROM eclipse-temurin:21-jre-jammy AS builder
 WORKDIR /extracted
 ARG JAR_FILE=target/*.jar
@@ -12,7 +13,7 @@ COPY --from=builder /extracted/spring-boot-loader/ ./
 COPY --from=builder /extracted/snapshot-dependencies/ ./
 COPY --from=builder /extracted/application/ ./
 
-ARG EXPOSED_PORT
+ARG EXPOSED_PORT=8080
 EXPOSE ${EXPOSED_PORT}
 
-ENTRYPOINT [ "java",  "org.springframework.boot.loader.launch.JarLauncher" ]
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]

@@ -127,21 +127,31 @@
                     <plugin>
                         <groupId>io.github.git-commit-id</groupId>
                         <artifactId>git-commit-id-maven-plugin</artifactId>
+                        <version>${git-commit-id-maven-plugin.version}</version>
                         <executions>
                             <execution>
+                                <id>get-the-git-infos</id>
                                 <goals>
                                     <goal>revision</goal>
                                 </goals>
+                                <phase>initialize</phase>
                             </execution>
                         </executions>
                         <configuration>
                             <verbose>true</verbose>
-                            <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
+                            <dateFormatTimeZone>${user.timezone}</dateFormatTimeZone>
+                            <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                            <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
                             <generateGitPropertiesFile>true</generateGitPropertiesFile>
                             <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
                             </generateGitPropertiesFilename>
-                            <failOnNoGitDirectory>false</failOnNoGitDirectory>
-                            <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+                            <includeOnlyProperties>
+                                <includeOnlyProperty>^git.build.(time|version)$</includeOnlyProperty>
+                                <includeOnlyProperty>^git.commit.id.(abbrev|full|time)$</includeOnlyProperty>
+                                <includeOnlyProperty>^git.branch$</includeOnlyProperty>
+                                <includeOnlyProperty>^git.remote.origin.url$</includeOnlyProperty>
+                            </includeOnlyProperties>
+                            <commitIdGenerationMode>full</commitIdGenerationMode>
                         </configuration>
                     </plugin>
                 </plugins>

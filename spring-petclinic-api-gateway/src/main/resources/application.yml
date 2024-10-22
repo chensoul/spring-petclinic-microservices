@@ -1,8 +1,8 @@
 spring:
   application:
     name: api-gateway
-  config:
-    import: optional:configserver:http://localhost:8888/
+
+spring.config.import: optional:configserver:http://localhost:8888/
 
 ---
 spring.config.activate.on-profile: docker

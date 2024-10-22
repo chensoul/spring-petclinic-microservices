@@ -29,9 +29,9 @@ You can tell Config Server to use your local Git repository by using `native` Sp
 
 ## Starting services locally with docker-compose
 In order to start entire infrastructure using Docker, you have to build images by executing
-``bash
+```bash
 ./mvnw clean install -P buildDocker
-``
+```
 This requires `Docker` or `Docker desktop` to be installed and running.
 
 Alternatively you can also build all the images on `Podman`, which requires Podman or Podman Desktop to be installed and running.
@@ -126,7 +126,7 @@ Dependency for Connector/J, the MySQL JDBC driver is already included in the `po
 
 You may start a MySql database with docker:
 
-```
+```bash
 docker run -e MYSQL_ROOT_PASSWORD=petclinic -e MYSQL_DATABASE=petclinic -p 3306:3306 mysql:5.7.8
 ```
 or download and install the MySQL database (e.g., MySQL Community Server 5.7 GA), which can be found here: https://dev.mysql.com/downloads/

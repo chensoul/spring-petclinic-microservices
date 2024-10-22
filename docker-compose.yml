@@ -1,7 +1,6 @@
 services:
   config-server:
     image: springcommunity/spring-petclinic-config-server
-    container_name: config-server
     environment:
       - SPRING_PROFILES_ACTIVE=native,docker
     deploy:
@@ -20,7 +19,6 @@ services:
 
   discovery-server:
     image: springcommunity/spring-petclinic-discovery-server
-    container_name: discovery-server
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -40,7 +38,6 @@ services:
 
   customers-service:
     image: springcommunity/spring-petclinic-customers-service
-    container_name: customers-service
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -55,7 +52,6 @@ services:
 
   visits-service:
     image: springcommunity/spring-petclinic-visits-service
-    container_name: visits-service
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -70,7 +66,6 @@ services:
 
   vets-service:
     image: springcommunity/spring-petclinic-vets-service
-    container_name: vets-service
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -85,7 +80,6 @@ services:
 
   genai-service:
     image: springcommunity/spring-petclinic-genai-service
-    container_name: genai-service
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -101,7 +95,6 @@ services:
 
   api-gateway:
     image: springcommunity/spring-petclinic-api-gateway
-    container_name: api-gateway
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -116,7 +109,6 @@ services:
 
   admin-server:
     image: springcommunity/spring-petclinic-admin-server
-    container_name: admin-server
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     deploy:
@@ -131,7 +123,6 @@ services:
 
   zipkin:
     image: openzipkin/zipkin
-    container_name: zipkin
     deploy:
       resources:
         limits:
@@ -149,7 +140,6 @@ services:
   ## Grafana / Prometheus
   prometheus:
     image: prom/prometheus
-    container_name: prometheus
     command:
       - --enable-feature=exemplar-storage
       - --config.file=/etc/prometheus/prometheus.yml
@@ -164,10 +154,8 @@ services:
 
   grafana:
     image: grafana/grafana
-    container_name: grafana
     volumes:
       - ./docker/grafana/provisioning:/etc/grafana/provisioning:ro
-      - ./docker/grafana/dashboards:/var/lib/grafana/dashboards:ro
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=password

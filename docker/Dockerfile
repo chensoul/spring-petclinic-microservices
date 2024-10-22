@@ -1,9 +1,8 @@
 FROM eclipse-temurin:21-jre-jammy AS builder
 WORKDIR /extracted
-
-ARG ARTIFACT_NAME
-COPY ${ARTIFACT_NAME}.jar app.jar
-
+ARG JAR_FILE=target/*.jar
+#ARG JAR_FILE=build/libs/*.jar
+COPY ${JAR_FILE} app.jar
 RUN java -Djarmode=layertools -jar app.jar extract
 
 FROM eclipse-temurin:21-jre-jammy
